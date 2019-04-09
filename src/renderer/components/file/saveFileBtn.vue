@@ -2,7 +2,7 @@
 <template>
   <div>
     <Upload action="#" :before-upload="handleUpload">
-      <Button icon="md-arrow-round-up">下载</Button>
+      <Button icon="md-arrow-round-down">下载</Button>
     </Upload>
   </div>
 </template>

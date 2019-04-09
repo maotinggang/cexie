@@ -2,26 +2,26 @@
   <div class="home">
     <Row>
       <Col span="18">
-        <load-file :input="input"></load-file>
+        <load-file v-on:input="getFile"></load-file>
       </Col>
       <Col span="6">
         <save-file-btn></save-file-btn>
       </Col>
     </Row>
     <Row>
-      <Col span="12">
-        <Card>
-          <line-cexie></line-cexie>
-        </Card>
+      <Col :style="{height: windowSize.height-100 + 'px'}">
+        <Split v-model="split" mode="vertical" min="200">
+          <div slot="top">
+            <Col span="12">
+              <line-cexie :size="sizeChart"></line-cexie>
+            </Col>
+            <Col span="12">
+              <line-cexie :size="sizeChart"></line-cexie>
+            </Col>
+          </div>
+          <div slot="bottom">table</div>
+        </Split>
       </Col>
-      <Col span="12">
-        <Card>
-          <line-cexie></line-cexie>
-        </Card>
-      </Col>
-    </Row>
-    <Row>
-      <Col></Col>
     </Row>
   </div>
 </template>
