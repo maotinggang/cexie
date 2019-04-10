@@ -1,4 +1,4 @@
 import Vue from 'vue'
-import VeLine from 'v-charts/lib/line.common'
+import vCharts from 'v-charts'
 
-Vue.component(VeLine.name, VeLine)
+Vue.use(vCharts)

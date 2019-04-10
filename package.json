@@ -55,6 +55,7 @@
   "dependencies": {
     "echarts": "^4.2.1",
     "iview": "^3.3.3",
+    "lodash": "^4.17.11",
     "v-charts": "^1.19.0",
     "vue": "^2.5.16",
     "vue-electron": "^1.0.6",

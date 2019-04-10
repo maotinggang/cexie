@@ -1,6 +1,7 @@
 import { LoadFile, SaveFileBtn } from '@/components/file'
 import { mapActions, mapState } from 'vuex'
 import { LineCexie } from '@/components/charts'
+import collection from 'lodash/collection'
 export default {
   name: 'home',
   components: {
@@ -10,7 +11,7 @@ export default {
   },
   data() {
     return {
-      split: 0.7
+      split: 0.8
     }
   },
   created() {
@@ -29,7 +30,7 @@ export default {
     }
   },
   computed: {
-    ...mapState('home', ['windowSize']),
+    ...mapState('home', ['windowSize', 'changeData']),
     sizeChart() {
       return {
         height: (this.windowSize.height - 100) * this.split + 'px',
@@ -38,6 +39,38 @@ export default {
     },
     heightTable() {
       return (this.windowSize.height - 100) * (1 - this.split) - 30
+    },
+    seriesX() {
+      let ret = []
+      collection.forEach(this.changeData, value => {
+        let isExist = collection.find(ret, { name: value.time })
+        if (isExist) {
+          isExist.data.push([value.x, value.depth * -1])
+        } else {
+          ret.push({
+            name: value.time,
+            type: 'line',
+            data: [[0, -20], [value.x, value.depth * -1]]
+          })
+        }
+      })
+      return ret
+    },
+    seriesY() {
+      let ret = []
+      collection.forEach(this.changeData, value => {
+        let isExist = collection.find(ret, { name: value.time })
+        if (isExist) {
+          isExist.data.push([value.y, value.depth * -1])
+        } else {
+          ret.push({
+            name: value.time,
+            type: 'line',
+            data: [[0, -20], [value.y, value.depth * -1]]
+          })
+        }
+      })
+      return ret
     }
   }
 }
