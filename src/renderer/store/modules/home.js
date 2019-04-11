@@ -25,14 +25,22 @@ const actions = {
     let workbook = xlsx.readFile(value)
     value = xlsx.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]])
     for (let i = 0; i < value.length; i++) {
-      let ret = this.degreeToDistant(value[i])
-      value[i].x = ret.x
-      value[i].y = ret.y
+      value[i].x =
+        value[i].G *
+        value[i].L *
+        1000 *
+        (Math.sin((value[i].x * Math.PI) / 360) -
+          Math.sin((value[i].x0 * Math.PI) / 360))
+      value[i].y =
+        value[i].G *
+        value[i].L *
+        1000 *
+        (Math.sin((value[i].y * Math.PI) / 360) -
+          Math.sin((value[i].y0 * Math.PI) / 360))
+      value[i].depth *= -1
+      value[i].depthAll *= -1
     }
     commit('READ_FILE', collection.sortBy(value, ['name', 'time', 'depth']))
-  },
-  degreeToDistant(value) {
-    return { x: 1, y: 2 }
   }
 }
 

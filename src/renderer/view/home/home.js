@@ -11,7 +11,8 @@ export default {
   },
   data() {
     return {
-      split: 0.8
+      split: 0.8,
+      filename: ''
     }
   },
   created() {
@@ -26,15 +27,19 @@ export default {
   methods: {
     ...mapActions('home', ['actionWindowSize', 'actionsReadFile']),
     getFile(filename) {
+      this.filename = filename
       this.actionsReadFile(filename)
+    },
+    refresh() {
+      this.actionsReadFile(this.filename)
     }
   },
   computed: {
     ...mapState('home', ['windowSize', 'changeData']),
     sizeChart() {
       return {
-        height: (this.windowSize.height - 100) * this.split + 'px',
-        width: this.windowSize.width / 2 + 'px'
+        height: this.windowSize.height - 50 + 'px',
+        width: this.windowSize.width / 2 - 15 + 'px'
       }
     },
     heightTable() {
@@ -45,12 +50,12 @@ export default {
       collection.forEach(this.changeData, value => {
         let isExist = collection.find(ret, { name: value.time })
         if (isExist) {
-          isExist.data.push([value.x, value.depth * -1])
+          isExist.data.push([value.x, value.depth])
         } else {
           ret.push({
             name: value.time,
             type: 'line',
-            data: [[0, -20], [value.x, value.depth * -1]]
+            data: [[0, value.depthAll], [value.x, value.depth]]
           })
         }
       })
@@ -61,12 +66,12 @@ export default {
       collection.forEach(this.changeData, value => {
         let isExist = collection.find(ret, { name: value.time })
         if (isExist) {
-          isExist.data.push([value.y, value.depth * -1])
+          isExist.data.push([value.y, value.depth])
         } else {
           ret.push({
             name: value.time,
             type: 'line',
-            data: [[0, -20], [value.y, value.depth * -1]]
+            data: [[0, value.depthAll], [value.y, value.depth]]
           })
         }
       })

@@ -1,8 +1,10 @@
-.home{
-    padding: 5px;
-    background-color: white;
+.home {
+  padding: 5px;
+  background-color: white;
 }
 
-.home-row{
-    border: 1px solid black
+.home-refresh-btn {
+  position: fixed;
+  top: 5px;
+  left: 430px;
 }

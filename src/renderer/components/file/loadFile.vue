@@ -8,7 +8,7 @@
       style="width: 300px;"
     ></Input>
     <Upload action="#" :before-upload="handleUpload" style="display: inline;">
-      <Button icon="md-arrow-round-up">上传</Button>
+      <Button icon="md-arrow-round-up">加载</Button>
     </Upload>
   </div>
 </template>
@@ -23,9 +23,7 @@ export default {
   },
   data() {
     return {
-      // TODO for test
-      filename:
-        "C:/Users/mg/Documents/comnav/work/部标机车辆数据分析/数据/test.txt"
+      filename: ""
     };
   },
   methods: {

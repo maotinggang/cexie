@@ -49,15 +49,15 @@ export default {
       toolbox: {
         feature: {
           saveAsImage: {}
-        }
+        },
+        right: 20
       },
       xAxis: {
         type: "value",
         position: "top",
         min: -10,
         max: 10,
-        minInterval: 1,
-        maxInterval: 2
+        interval: 1
       },
       yAxis: {
         type: "value",
