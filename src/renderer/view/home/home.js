@@ -12,7 +12,17 @@ export default {
   data() {
     return {
       split: 0.8,
-      filename: ''
+      filename: '',
+      symbol: [
+        'emptyCircle',
+        'circle',
+        'emptyRect',
+        'rect',
+        'emptyTriangle',
+        'triangle',
+        'emptyDiamond',
+        'diamond'
+      ]
     }
   },
   created() {
@@ -35,7 +45,7 @@ export default {
     }
   },
   computed: {
-    ...mapState('home', ['windowSize', 'changeData']),
+    ...mapState('home', ['windowSize', 'changeData', 'maxChange']),
     sizeChart() {
       return {
         height: this.windowSize.height - 50 + 'px',
@@ -55,6 +65,8 @@ export default {
           ret.push({
             name: value.time,
             type: 'line',
+            symbol: this.symbol[ret.length % 8],
+            symbolSize: 6,
             data: [[0, value.depthAll], [value.x, value.depth]]
           })
         }
@@ -71,11 +83,25 @@ export default {
           ret.push({
             name: value.time,
             type: 'line',
+            symbol: this.symbol[ret.length % 8],
+            symbolSize: 6,
             data: [[0, value.depthAll], [value.y, value.depth]]
           })
         }
       })
       return ret
+    },
+    paramsX() {
+      return {
+        imgName: 'X方向变化量(毫米)',
+        maxChange: this.maxChange
+      }
+    },
+    paramsY() {
+      return {
+        imgName: 'Y方向变化量(毫米)',
+        maxChange: this.maxChange
+      }
     }
   }
 }

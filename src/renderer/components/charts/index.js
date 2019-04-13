@@ -1,2 +1,2 @@
-import LineCexie from './lineCexie.vue';
+import LineCexie from './lineCexie.vue'
 export { LineCexie }

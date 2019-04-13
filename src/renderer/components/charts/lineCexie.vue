@@ -21,9 +21,9 @@ export default {
       type: Object,
       default: null
     },
-    name: {
-      type: String,
-      default: "变化量"
+    params: {
+      type: Object,
+      default: null
     },
     series: {
       type: Object,
@@ -33,7 +33,7 @@ export default {
   data() {
     return {
       title: {
-        text: this.name,
+        text: this.params.imgName,
         left: "25px",
         top: "5px",
         textStyle: { fontWeight: "lighter", fontSize: 15 }
@@ -55,16 +55,18 @@ export default {
       xAxis: {
         type: "value",
         position: "top",
-        min: -10,
-        max: 10,
+        min: () => {
+          return Math.round(this.params.maxChange + 5) * -1;
+        },
+        max: () => {
+          return Math.round(this.params.maxChange + 5);
+        },
         interval: 1
       },
       yAxis: {
         type: "value",
-        min: -20,
         max: 0,
-        minInterval: 1,
-        maxInterval: 2
+        interval: 1
       }
     };
   }
